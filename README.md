@@ -22,7 +22,7 @@ initFrame = NodeTree_t0
 finalFrame = NodeTree_t2
 
 if WindowTransitionObserved(a11yEvents):
-    initialElements = NodeTree_t1
+    initFrame = NodeTree_t1
 
 currentFocus = getA11yFocus(initFrame)
 LAE = set()
@@ -46,7 +46,7 @@ initFrame = NodeTree_t0
 finalFrame = NodeTree_t2
 
 if WindowTransitionObserved(a11yEvents):
-    initialElements = NodeTree_t1
+    initFrame = NodeTree_t1
 
 currentFocus = getA11yFocus(initFrame)
 
@@ -70,11 +70,11 @@ return LDE
 # Create pairs of events where type is WINDOW_CONTENT_CHANGED and S1 is within S2
 pairs = [(e1.source, e2.source) for e1, e2 in a11yEvents if e1.type == e2.type == WINDOW_CONTENT_CHANGED and isWithin(e1.source, e2.source)]  
 
-finalFrame = NodeTree_t2
 initFrame = NodeTree_t0
+finalFrame = NodeTree_t2
 
 if WindowTransitionObserved(a11yEvents):
-    initialElements = NodeTree_t1
+    initFrame = NodeTree_t1
 
 SLE = set()
 
@@ -97,7 +97,7 @@ initFrame = NodeTree_t0
 finalFrame = NodeTree_t2
 
 if WindowTransitionObserved(a11yEvents):
-    initialElements = NodeTree_t1
+    initFrame = NodeTree_t1
 
 currentFocus = getA11yFocus(initFrame)
 MDE = set()
@@ -115,10 +115,13 @@ return MDE
 )
 
 ```python
-# Set up initial, intermediate, and final frames
+# Set up initial and final frames
 initFrame = NodeTree_t0
-midFrame = NodeTree_t1
 finalFrame = NodeTree_t2
+
+if WindowTransitionObserved(a11yEvents):
+    initFrame = NodeTree_t1
+    
 changedElements = set()
 
 # Define the procedure to detect changes between two frames
@@ -127,12 +130,6 @@ def DetectChanges(frameA, frameB):
         for e2 in frameB:
             if isEquivalent(e1, e2) and hash(e1) != hash(e2) and not e2.isLiveRegion:
                 changedElements.add(e2)
-
-# Detect changes between initFrame and midFrame
-DetectChanges(initFrame, midFrame)
-
-# Detect changes between midFrame and finalFrame
-DetectChanges(midFrame, finalFrame)
 
 # Detect changes between initFrame and finalFrame
 DetectChanges(initFrame, finalFrame)
