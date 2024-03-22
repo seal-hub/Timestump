@@ -70,7 +70,7 @@ if WindowTransitionObserved(a11yEvents):
 SLE = set()
 
 for S1, S2 in pairs:
-    if S1 not in initFrame and S2 in finalFrame and (not S1.isLiveRegion or S1.isClickable):
+    if S1 not in initFrame and S2 in finalFrame and isContainer(S2,S1) and (not S1.isLiveRegion or S1.isClickable):
         SLE.add(S1)
 
 return SLE
@@ -91,7 +91,7 @@ MDE = set()
 
 for e_initial in initialElements:
     for e_final in finalFrame:
-        if isEquivalent(e_initial, e_final) and e_initial.bounds != e_final.bounds and e_initial in sources and e_final in sources and (isAbove(e_final, currentFocus) or (isAbove(e_initial, currentFocus) and isBelow(e_final, currentFocus))):
+        if isEquivalent(e_initial, e_final) and e_initial.bounds != e_final.bounds and e_initial in sources and e_final in sources and (isAbove(e_final, currentFocus) or isOutOfScreenBounds(e_final)):
             MDE.add(e_final)
 
 return MDE
