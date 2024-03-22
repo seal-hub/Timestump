@@ -158,17 +158,14 @@ def get_attributes_changed_elements(initial_screen_nodes, middle_screen_nodes, f
     changed_nodes = set()
     # Compare hash values across screens and identify changed nodes
 
-    # Compare initial to middle and final
-    for resource_id, hash_value in initial_hashes.items():
-        if resource_id in middle_hashes and hash_value != middle_hashes[resource_id]:
-            changed_nodes.add(initial_nodes[resource_id])
-        if resource_id in final_hashes and hash_value != final_hashes[resource_id]:
-            changed_nodes.add(initial_nodes[resource_id])
-
-    # Compare middle to final
-    for resource_id, hash_value in middle_hashes.items():
-        if resource_id in final_hashes and hash_value != final_hashes[resource_id]:
-            changed_nodes.add(middle_nodes[resource_id])
+    if wc:
+        for resource_id, hash_value in initial_hashes.items():
+            if resource_id in final_hashes and hash_value != final_hashes[resource_id]:
+                changed_nodes.add(initial_nodes[resource_id])
+    else:
+        for resource_id, hash_value in middle_hashes.items():
+            if resource_id in final_hashes and hash_value != final_hashes[resource_id]:
+                changed_nodes.add(middle_nodes[resource_id])
 
     define_a11y_focus(changed_nodes, last_focused_bounds, accessibility_focuses)
     return changed_nodes
