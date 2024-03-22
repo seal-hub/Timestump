@@ -3,7 +3,13 @@
 
 ### [Study for the Precision of Captured Data](https://github.com/timestump/timestump/blob/main/Data%20Capturing%20Accuracy/Data%20Capturing%20Accuracy.md)
 
-### Problematic Dynamic Content Changes with Algorithms
+### Problematic Dynamic Content Changes with Pseudocodes
+
+
+
+When you click on the images below, you will be directed to either a **video** or a **GIF** that better illustrates the issue.
+
+
 
 #### Latent Appearing Content
 
