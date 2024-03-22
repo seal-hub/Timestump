@@ -7,7 +7,7 @@
 
 
 
-When you click on the images below, you will be directed to either a **video** or a **GIF** that better illustrates the issue.
+When you click on the images below, you will be directed to a **GIF** that better illustrates the issue.
 
 
 
