@@ -5,12 +5,12 @@
 
 ### Problematic Dynamic Content Changes with Algorithms
 
-When you click on the images below, you will be directed to either a **video** or a **GIF** that better illustrates the issue.
-
 #### Latent Appearing Content
 
 [![Watch the video](https://github.com/timestump/timestump/blob/main/Media/Fuelio.png)](https://github.com/timestump/timestump/blob/main/Media/fuelio.mp4
 )
+
+[![Watch the video](https://github.com/timestump/timestump/blob/main/Media/fuelio.gif)]()
 
 
 <!-- <img src="fuelio.mp4" alt="Appeared buttons remain unknown to screen reader users" width="150"/> -->
@@ -39,6 +39,8 @@ return LAE
 [![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/Burn.png)](https://github.com/timestump/timestump/blob/main/Media/burn.gif
 )
 
+[![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/burn.gif)]()
+
 ```python
 sources = [event.source for event in a11yEvents if event.type == WINDOW_CONTENT_CHANGED]
 
@@ -66,6 +68,8 @@ return LDE
 [![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/Spotify.png)](https://github.com/timestump/timestump/blob/main/Media/spotify.gif 
 )
 
+[![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/spotify.gif)]()
+
 ```python
 # Create pairs of events where type is WINDOW_CONTENT_CHANGED and S1 is within S2
 pairs = [(e1.source, e2.source) for e1, e2 in a11yEvents if e1.type == e2.type == WINDOW_CONTENT_CHANGED and isWithin(e1.source, e2.source)]  
@@ -88,6 +92,8 @@ return SLE
 
 [![Watch the video](https://github.com/timestump/timestump/blob/main/Media/Autozone.png)](https://github.com/timestump/timestump/blob/main/Media/autozone.mp4 
 )
+
+[![Watch the video](https://github.com/timestump/timestump/blob/main/Media/autozone.gif)]()
 
 ```python
 # Extract sources from events with type WINDOW_CONTENT_CHANGED
@@ -113,6 +119,8 @@ return MDE
 
 [![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/Fuelio2.png)](https://github.com/timestump/timestump/blob/main/Media/fuelio2.gif 
 )
+
+[![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/fuelio2.gif)]()
 
 ```python
 # Set up initial and final frames
