@@ -1,5 +1,5 @@
 ## Automated Accessibility Analysis of Dynamic Content Changes on Mobile Apps
-### Source Code
+### [Source Code of TIMESTUMP](https://github.com/timestump/timestump/tree/main/Source%20Code)
 
 
 
@@ -7,7 +7,7 @@
 
 #### Latent Appearing Content
 
-[![Watch the video](https://github.com/timestump/timestump/blob/main/media/Fuelio.png)](https://github.com/timestump/timestump/blob/main/media/fuelio.mp4 
+[![Watch the video](https://github.com/timestump/timestump/blob/main/Media/Fuelio.png)](https://github.com/timestump/timestump/blob/main/Media/fuelio.mp4
 )
 
 
@@ -32,7 +32,7 @@ for e in finalFrame:
 return LAE
 ```
 
-[![Watch the gif](https://github.com/timestump/timestump/blob/main/media/Burn.png)](https://github.com/timestump/timestump/blob/main/media/burn.gif 
+[![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/Burn.png)](https://github.com/timestump/timestump/blob/main/Media/burn.gif
 )
 
 #### Latent Disappearing Content
@@ -59,7 +59,7 @@ for e in prunedInit:
 
 return LDE
 ```
-[![Watch the gif](https://github.com/timestump/timestump/blob/main/media/Spotify.png)](https://github.com/timestump/timestump/blob/main/media/spotify.gif 
+[![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/Spotify.png)](https://github.com/timestump/timestump/blob/main/Media/spotify.gif 
 )
 
 #### Latent Short-lived Content
@@ -82,7 +82,7 @@ for S1, S2 in pairs:
 
 return SLE
 ```
-[![Watch the video](https://github.com/timestump/timestump/blob/main/media/Autozone.png)](https://github.com/timestump/timestump/blob/main/media/autozone.mp4 
+[![Watch the video](https://github.com/timestump/timestump/blob/main/Media/Autozone.png)](https://github.com/timestump/timestump/blob/main/Media/autozone.mp4 
 )
 
 #### Latent Moving Content
@@ -107,7 +107,7 @@ for e_initial in initialElements:
 
 return MDE
 ```
-[![Watch the gif](https://github.com/timestump/timestump/blob/main/media/Fuelio2.png)](https://github.com/timestump/timestump/blob/main/media/fuelio2.gif 
+[![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/Fuelio2.png)](https://github.com/timestump/timestump/blob/main/Media/fuelio2.gif 
 )
 
 #### Latent Content Modification
