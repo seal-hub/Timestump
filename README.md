@@ -7,8 +7,7 @@
 
 #### Latent Appearing Content
 
-
-[![Watch the video](https://github.com/timestump/timestump/blob/main/Fuelio.png)](https://github.com/timestump/timestump/blob/main/fuelio.mp4 
+[![Watch the video](https://github.com/timestump/timestump/blob/main/media/Fuelio.png)](https://github.com/timestump/timestump/blob/main/media/fuelio.mp4 
 )
 
 
@@ -33,7 +32,11 @@ for e in finalFrame:
 return LAE
 ```
 
+[![Watch the gif](https://github.com/timestump/timestump/blob/main/media/Burn.png)](https://github.com/timestump/timestump/blob/main/media/burn.gif 
+)
+
 #### Latent Disappearing Content
+
 ```python
 sources = [event.source for event in a11yEvents if event.type == WINDOW_CONTENT_CHANGED]
 
@@ -56,7 +59,11 @@ for e in prunedInit:
 
 return LDE
 ```
+[![Watch the gif](https://github.com/timestump/timestump/blob/main/media/Spotify.png)](https://github.com/timestump/timestump/blob/main/media/spotify.gif 
+)
+
 #### Latent Short-lived Content
+
 ```python
 # Create pairs of events where type is WINDOW_CONTENT_CHANGED and S1 is within S2
 pairs = [(e1.source, e2.source) for e1, e2 in a11yEvents if e1.type == e2.type == WINDOW_CONTENT_CHANGED and isWithin(e1.source, e2.source)]  # Algorithm line 1
@@ -75,7 +82,11 @@ for S1, S2 in pairs:
 
 return SLE
 ```
+[![Watch the video](https://github.com/timestump/timestump/blob/main/media/Autozone.png)](https://github.com/timestump/timestump/blob/main/media/autozone.mp4 
+)
+
 #### Latent Moving Content
+
 ```python
 # Extract sources from events with type WINDOW_CONTENT_CHANGED
 sources = [event.source for event in a11yEvents if event.type == WINDOW_CONTENT_CHANGED]
@@ -96,7 +107,11 @@ for e_initial in initialElements:
 
 return MDE
 ```
+[![Watch the gif](https://github.com/timestump/timestump/blob/main/media/Fuelio2.png)](https://github.com/timestump/timestump/blob/main/media/fuelio2.gif 
+)
+
 #### Latent Content Modification
+
 ```python
 # Set up initial, intermediate, and final frames
 initFrame = NodeTree_t0
