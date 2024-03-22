@@ -34,10 +34,10 @@ for e in finalFrame:
 return LAE
 ```
 
+#### Latent Disappearing Content
+
 [![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/Burn.png)](https://github.com/timestump/timestump/blob/main/Media/burn.gif
 )
-
-#### Latent Disappearing Content
 
 ```python
 sources = [event.source for event in a11yEvents if event.type == WINDOW_CONTENT_CHANGED]
@@ -61,10 +61,10 @@ for e in prunedInit:
 
 return LDE
 ```
+#### Latent Short-lived Content
+
 [![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/Spotify.png)](https://github.com/timestump/timestump/blob/main/Media/spotify.gif 
 )
-
-#### Latent Short-lived Content
 
 ```python
 # Create pairs of events where type is WINDOW_CONTENT_CHANGED and S1 is within S2
@@ -84,10 +84,10 @@ for S1, S2 in pairs:
 
 return SLE
 ```
+#### Latent Moving Content
+
 [![Watch the video](https://github.com/timestump/timestump/blob/main/Media/Autozone.png)](https://github.com/timestump/timestump/blob/main/Media/autozone.mp4 
 )
-
-#### Latent Moving Content
 
 ```python
 # Extract sources from events with type WINDOW_CONTENT_CHANGED
@@ -109,10 +109,10 @@ for e_initial in initialElements:
 
 return MDE
 ```
+#### Latent Content Modification
+
 [![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/Fuelio2.png)](https://github.com/timestump/timestump/blob/main/Media/fuelio2.gif 
 )
-
-#### Latent Content Modification
 
 ```python
 # Set up initial, intermediate, and final frames
