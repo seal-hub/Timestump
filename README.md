@@ -3,7 +3,9 @@
 
 
 
-### Problematic Dynamic Content Changes
+### Problematic Dynamic Content Changes with Algorithms
+
+When you click on the images below, you will be directed to either a **video** or a **GIF** that better illustrates the issue.
 
 #### Latent Appearing Content
 
