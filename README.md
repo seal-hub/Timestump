@@ -50,8 +50,8 @@ if WindowTransitionObserved(a11yEvents):
 
 currentFocus = getA11yFocus(initFrame)
 
-prunedInit = getSubtreeInBounds(initFrame, sources)  # Algorithm line 7
-prunedFinal = getSubtreeInBounds(finalFrame, sources)  # Algorithm line 8
+prunedInit = getSubtreeInBounds(initFrame, sources)
+prunedFinal = getSubtreeInBounds(finalFrame, sources)
 
 LDE = set()
 
@@ -68,7 +68,7 @@ return LDE
 
 ```python
 # Create pairs of events where type is WINDOW_CONTENT_CHANGED and S1 is within S2
-pairs = [(e1.source, e2.source) for e1, e2 in a11yEvents if e1.type == e2.type == WINDOW_CONTENT_CHANGED and isWithin(e1.source, e2.source)]  # Algorithm line 1
+pairs = [(e1.source, e2.source) for e1, e2 in a11yEvents if e1.type == e2.type == WINDOW_CONTENT_CHANGED and isWithin(e1.source, e2.source)]  
 
 finalFrame = NodeTree_t2
 initFrame = NodeTree_t0
@@ -79,7 +79,7 @@ if WindowTransitionObserved(a11yEvents):
 SLE = set()
 
 for S1, S2 in pairs:
-    if S1 not in initFrame and S2 in finalFrame and isContainer(S2,S1) and (not S1.isLiveRegion or S1.isClickable):
+    if S1 not in initFrame and S2 in finalFrame and (not S1.isLiveRegion or S1.isClickable):
         SLE.add(S1)
 
 return SLE

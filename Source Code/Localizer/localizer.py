@@ -13,15 +13,11 @@ save_only_on_error = True
 logging.basicConfig(level=logging.INFO)
 
 def get_short_lived_elements() -> list:
-    """Returns a list of short-lived elements
-       Short-lived elements means elements that are present in the middle frame but not in the first frame and disappear
-       in the last frame"""
+    """Returns a list of short-lived elements"""
     # Create sets for quick lookup of elements by their unique identifiers in the first and last frames.
     unique_identifiers_first = {element.identifier_group_alternative for element in target_elements_1}
     unique_identifiers_last = {element.identifier_group_alternative for element in target_elements_2}
 
-    # Simply put, we define short-lived elements based on their presence in the middle frame
-    # and their absence in both the first and last frames.
     # Paper definition: "If the element S1 is not present in the first frame, and its container is observed
     # in the second frame"
     potential_short_lived = [element for element in target_element_middle
