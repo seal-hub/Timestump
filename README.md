@@ -7,13 +7,12 @@
 
 #### Latent Appearing Content
 
-[![Watch the video](https://github.com/timestump/timestump/blob/main/Media/Fuelio.png)](https://github.com/timestump/timestump/blob/main/Media/fuelio.mp4
+[![Watch the video](https://github.com/timestump/timestump/blob/main/Media/Fuelio.png)](https://github.com/timestump/timestump/blob/main/Media/fuelio.gif
 )
 
-[![Watch the video](https://github.com/timestump/timestump/blob/main/Media/fuelio.gif)]()
-
-
 <!-- <img src="fuelio.mp4" alt="Appeared buttons remain unknown to screen reader users" width="150"/> -->
+
+##### Pseudocode for Detection of Latent Appearing Content
 
 ```python
 sources = [event.source for event in a11yEvents if event.type == WINDOW_CONTENT_CHANGED]
@@ -39,7 +38,7 @@ return LAE
 [![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/Burn.png)](https://github.com/timestump/timestump/blob/main/Media/burn.gif
 )
 
-[![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/burn.gif)]()
+##### Pseudocode for Detection of Latent Disappearing Content
 
 ```python
 sources = [event.source for event in a11yEvents if event.type == WINDOW_CONTENT_CHANGED]
@@ -68,7 +67,7 @@ return LDE
 [![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/Spotify.png)](https://github.com/timestump/timestump/blob/main/Media/spotify.gif 
 )
 
-[![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/spotify.gif)]()
+##### Pseudocode for Detection of Latent Short-lived Content
 
 ```python
 # Create pairs of events where type is WINDOW_CONTENT_CHANGED and S1 is within S2
@@ -90,10 +89,10 @@ return SLE
 ```
 #### Latent Moving Content
 
-[![Watch the video](https://github.com/timestump/timestump/blob/main/Media/Autozone.png)](https://github.com/timestump/timestump/blob/main/Media/autozone.mp4 
+[![Watch the video](https://github.com/timestump/timestump/blob/main/Media/Autozone.png)](https://github.com/timestump/timestump/blob/main/Media/autozone.gif
 )
 
-[![Watch the video](https://github.com/timestump/timestump/blob/main/Media/autozone.gif)]()
+##### Pseudocode for Detection of Latent Moving Content
 
 ```python
 # Extract sources from events with type WINDOW_CONTENT_CHANGED
@@ -120,7 +119,7 @@ return MDE
 [![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/Fuelio2.png)](https://github.com/timestump/timestump/blob/main/Media/fuelio2.gif 
 )
 
-[![Watch the gif](https://github.com/timestump/timestump/blob/main/Media/fuelio2.gif)]()
+##### Pseudocode for Detection of Latent Content Modification
 
 ```python
 # Set up initial and final frames
