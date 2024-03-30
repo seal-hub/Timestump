@@ -1,4 +1,9 @@
-# Accessibility Broadcast Dev
+This is a fork from the original repository <https://github.com/qbalsdon/accessibility_broadcast_dev>.
+
+In `timestump/Source Code/scripts` directory, execute `./talkback --help` to see the added features and interact with the device using the service. `./action <name> <actionType>` performs a single action from <CLICK, SWIPE, TYPE> , on the currently focused element and captures the data before, after and while performing the action.
+
+-------------
+# (ORIGINAL) Accessibility Broadcast Dev
 
 Allow developers and automation testers to interact with Android's Accessibility features using the Android Debug Bridge.
 
