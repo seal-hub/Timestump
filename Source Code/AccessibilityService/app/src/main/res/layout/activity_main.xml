@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.balsdon.accessibilityBroadcastService.DemoActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.AccessibilityActions.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:titleTextColor="?attr/colorOnPrimary"
+            app:popupTheme="@style/Theme.AccessibilityActions.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enabled_accessibility_services"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/talkbackSwitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="@string/talkback_label"/>
+                <!-- TODO: Check if installed! -->
+<!--                <androidx.appcompat.widget.SwitchCompat-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/accessibility_scanner_label"/>-->
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/abdSwitch"
+                    android:clickable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/broadcast_dev_label"/>
+            </LinearLayout>
+            <TextView
+                style="@style/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/heading_basic_navigation"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/swipeLeft"
+                    style="@style/hasAccessibilityDimen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/action_prev_content_description"
+                    android:text="@string/action_prev" />
+
+                <Button
+                    android:id="@+id/swipeRight"
+                    style="@style/hasAccessibilityDimen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
+                    android:contentDescription="@string/action_next_content_description"
+                    android:text="@string/action_next" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/openMenu"
+                style="@style/hasAccessibilityDimen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/button_action_open_accessibility_menu" />
+            <Button
+                android:id="@+id/settingsButton"
+                style="@style/hasAccessibilityDimen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/button_action_open_settings" />
+            <TextView
+                style="@style/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/heading_volume_controls"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/volumeDown"
+                    style="@style/hasAccessibilityDimen"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/button_background"
+                    android:contentDescription="@string/decrease_accessibility_volume"
+                    android:src="@drawable/ic_volume_down" />
+
+                <ImageButton
+                    android:id="@+id/volumeUp"
+                    style="@style/hasAccessibilityDimen"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/button_background"
+                    android:contentDescription="@string/increase_accessibility_volume"
+                    android:src="@drawable/ic_volume_up" />
+            </LinearLayout>
+            <TextView
+                style="@style/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/heading_custom_features"
+                />
+            <Button
+                android:id="@+id/a11ySettings"
+                style="@style/hasAccessibilityDimen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/button_action_open_accessibility_services" />
+            <Button
+                android:id="@+id/devCurtain"
+                style="@style/hasAccessibilityDimen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/button_action_show_dev_curtain" />
+            <TextView
+                style="@style/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/heading_useful_links"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:text="@string/useful_link_1" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:text="@string/useful_link_2" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:text="@string/useful_link_3" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:text="@string/useful_link_4" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
