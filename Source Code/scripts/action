@@ -1,0 +1,64 @@
+#!/bin/bash
+
+timestamp() {
+    date +"%m-%d %H:%M:%S.000" # current time
+}
+
+NAME=$1
+ACTION=$2
+HOMEDIR="XXX"
+
+echo "screenshot 1--before"
+talkback screenshot $NAME.1.png
+talkback dump $NAME.1
+talkback dumptb $NAME.1
+
+echo "record video"
+talkback record $NAME &
+rpid=$!
+echo "Record process with pid $rpid"
+
+if [ "$ACTION" = "CLICK" ]; then
+    echo "Perform Click!"
+    START_TIME=`talkback vmtime`
+    talkback cwc $NAME.action
+    sleep 10
+fi
+
+if [ "$ACTION" = "SWIPE" ]; then
+    echo "Perform SWIPE!"
+    START_TIME=`talkback vmtime`
+    talkback nwc $NAME.action
+    sleep 10
+fi
+
+if [ "$ACTION" = "TYPE" ]; then
+    echo "Perform TYPE!"
+    START_TIME=`talkback vmtime`
+    talkback type intimeaccessibility@gmail.com
+    talkback cwc $NAME.action
+    sleep 10
+fi
+
+echo "Dump events"
+talkback dumpevents "$START_TIME" $NAME
+sleep 5
+
+echo "stop video"
+kill $rpid
+echo $!
+sleep 20
+talkback fetch $NAME
+
+echo "screenshot 3---after"
+talkback screenshot $NAME.3.png
+talkback dump $NAME.3
+talkback dumptb $NAME.3
+
+DEST="${HOMEDIR}/results/$NAME"
+mkdir $DEST
+mv "${HOMEDIR}/$NAME.3.png" "${HOMEDIR}/$NAME.3-a11y.xml" "${HOMEDIR}/$NAME.3_tb.xml" "${HOMEDIR}/$NAME.1.png" "${HOMEDIR}/$NAME.action.2.png" "${HOMEDIR}/$NAME.1-a11y.xml" "${HOMEDIR}/$NAME.action-a11y.xml" "${HOMEDIR}/$NAME.1_tb.xml"  "${HOMEDIR}/$NAME-ev.txt" "${HOMEDIR}/$NAME.mp4" $DEST
+
+FINISH_TIME=`talkback vmtime`
+echo "Start time: $START_TIME"
+echo "Finish time: $FINISH_TIME"

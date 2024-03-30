@@ -1,0 +1,168 @@
+#!/bin/bash
+
+timestamp() {
+    date +"%m-%d %H:%M:%S.000" # current time
+}
+
+VALUE_OFF="com.android.talkback/com.google.android.marvin.talkback.TalkBackService"
+TALKBACK="com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService"
+A11YSERVICE="com.balsdon.accessibilityDeveloperService/com.balsdon.accessibilityDeveloperService.AccessibilityDeveloperService"
+VALUE_ON="$A11YSERVICE:$TALKBACK"
+device=$IP:$PORT
+device="emulator-5554"
+
+
+if [ "$1" = on ]; then
+  adb -s $device shell settings put secure enabled_accessibility_services $A11YSERVICE
+  adb -s $device shell settings put secure enabled_accessibility_services $VALUE_ON
+elif [ "$1" = off ]; then
+  adb -s $device shell settings put secure enabled_accessibility_services $VALUE_OFF
+elif [ "$1" = pre ]; then
+  adb -s $device shell am broadcast -a com.balsdon.talkback.accessibility -e ACTION "ACTION_SWIPE_LEFT" -e BROADCAST_ID "$2"
+elif [ "$1" = next ]; then
+  adb -s $device shell am broadcast -a com.balsdon.talkback.accessibility -e ACTION "ACTION_SWIPE_RIGHT" -e BROADCAST_ID "$2"
+elif [ "$1" = nwc ]; then
+  adb -s $device shell am broadcast -a com.balsdon.talkback.accessibility -e ACTION "ACTION_SWIPE_RIGHT_WAIT_CAPTURE" -e BROADCAST_ID "$2"
+  sleep 6
+  adb -s $device shell run-as com.balsdon.accessibilityDeveloperService cat "/data/user/0/com.balsdon.accessibilityDeveloperService/files/a11y3-$2.xml" | python3 -c 'import sys; import xml.dom.minidom; s=sys.stdin.read(); print(xml.dom.minidom.parseString(s).toprettyxml())' > "$2-a11y.xml"
+  sleep 10
+  adb -s $device shell run-as com.balsdon.accessibilityDeveloperService cat "/data/user/0/com.balsdon.accessibilityDeveloperService/files/$2.png" > $2.2.png
+elif [ "$1" = click ]; then
+  adb -s $device shell am broadcast -a com.balsdon.talkback.accessibility -e ACTION "ACTION_CLICK" -e BROADCAST_ID "$2"
+elif [ "$1" = cwc ]; then
+  adb -s $device shell am broadcast -a com.balsdon.talkback.accessibility -e ACTION "ACTION_CWC" -e BROADCAST_ID "$2"
+  sleep 6
+  adb -s $device shell run-as com.balsdon.accessibilityDeveloperService cat "/data/user/0/com.balsdon.accessibilityDeveloperService/files/a11y3-$2.xml" | python3 -c 'import sys; import xml.dom.minidom; s=sys.stdin.read(); print(xml.dom.minidom.parseString(s).toprettyxml())' > "$2-a11y.xml"
+  sleep 10
+  adb -s $device shell run-as com.balsdon.accessibilityDeveloperService cat "/data/user/0/com.balsdon.accessibilityDeveloperService/files/$2.png" > $2.2.png
+
+elif [ "$1" = type ]; then
+  adb -s $device shell input text $2
+
+elif [ "$1" = idle ]; then
+  adb -s $device shell am broadcast -a com.balsdon.talkback.accessibility -e ACTION "ACTION_IDLE_CAPTURE" -e BROADCAST_ID "$2"
+  sleep 2
+  adb -s $device shell run-as com.balsdon.accessibilityDeveloperService cat "/data/user/0/com.balsdon.accessibilityDeveloperService/files/$2.png" > $2.png
+
+elif [ "$1" = up ]; then
+  adb -s $device shell am broadcast -a com.balsdon.talkback.accessibility -e ACTION "ACTION_SWIPE_UP" -e BROADCAST_ID "$2"
+elif [ "$1" = down ]; then
+  adb -s $device shell am broadcast -a com.balsdon.talkback.accessibility -e ACTION "ACTION_SWIPE_DOWN" -e BROADCAST_ID "$2"
+elif [ "$1" = focus ]; then
+  adb -s $device shell am broadcast -a com.balsdon.talkback.accessibility -e ACTION "ACTION_FOCUS_ELEMENT" -e BROADCAST_ID "$2" -e PARAMETER_ID "$3"
+elif [ "$1" = dump ]; then
+
+    adb -s $device shell am broadcast -a com.balsdon.talkback.accessibility -e ACTION "ACTION_DUMP_A11Y_TREE" -e BROADCAST_ID "$2"
+    sleep 4
+    adb -s $device shell run-as com.balsdon.accessibilityDeveloperService cat "/data/user/0/com.balsdon.accessibilityDeveloperService/files/a11y3-$2.xml" | python3 -c 'import sys; import xml.dom.minidom; s=sys.stdin.read(); print(xml.dom.minidom.parseString(s).toprettyxml())' > "$2-a11y.xml"
+
+elif [ "$1" = dumptb ]; then
+    requested_log=`talkback vmtime`
+    adb -s $device shell am broadcast -a com.balsdon.talkback.accessibility -e ACTION "ACTION_LOG_TB_TREE" -e BROADCAST_ID "$2"
+    sleep 4
+    adb -s $device logcat -t "$requested_log" -d | grep "talkback: TreeDebug" > "$2_tb.xml"
+
+elif [ "$1" = dumpevents ]; then
+    ttime="$2"
+    n=${#ttime}
+#    check if the length of the string is less than 5
+    if [ $n -lt 5 ]; then
+        echo "No start time provided"
+        ttime=`talkback vmtime $2`
+        echo "Set the time to $ttime"
+    fi
+
+    adb -s $device logcat -t "$ttime" -d | grep "AccessibilityEvents"> "$3-ev.txt"
+
+elif [ "$1" = vmtime ]; then
+    if [ -z "$2" ]; then
+      adb -s $device shell 'echo $(date +"%m-%d %H:%M:%S.000")'
+    else
+      echo $(date -v -"$2"S +"%m-%d %H:%M:%S.000")
+    fi
+
+
+elif [ "$1" = checkack ]; then
+    adb -s $device exec-out run-as com.balsdon.accessibilityDeveloperService find files -type f -name "$2"*
+elif [ "$1" = releaseid ]; then
+    adb -s $device exec-out run-as com.balsdon.accessibilityDeveloperService find files -type f -name "$2"* -delete
+
+elif [ "$1" = pkgname ]; then
+    adb -s $device shell dumpsys activity activities | grep "topResumedActivity" | awk '{print $3;}'
+
+elif [ "$1" = orientation ]; then
+    adb -s $device shell dumpsys input | grep 'SurfaceOrientation' | awk '{ print $2 }'
+
+elif [ "$1" = getAPK ]; then
+    mkdir "apk"
+    cd "apk"
+    # grabs the path to the base apk and other related apks | get the substring that only contains the path | give the paths to the pull command
+    adb -s $device shell pm path $2  |  awk '{print substr($1, index($1, ":")+1, index($1, ".apk")-1);}' | xargs -n1 adb -s $device pull
+    cd ".."
+    mv "apk/" $3
+
+elif [ "$1" = install ]; then
+    adb -s $device install -r -g $2
+elif [ "$1" = installmulti ]; then
+    adb -s $device install-multiple -r -g $2
+elif [ "$1" = googleplay ]; then
+    adb -s $device shell am start -a android.intent.action.VIEW -d "market://details?id=$2"
+
+elif [ "$1" = snapshot ]; then
+    adb -s $device emu avd snapshot save "$2"
+
+elif [ "$1" = del ]; then
+    adb -s $device emu avd snapshot del "$2"
+
+elif [ "$1" = loadsnapshot ]; then
+  adb -s $device emu avd snapshot load "$2"
+
+elif [ "$1" = listsnapshot ]; then
+  adb -s $device emu avd snapshot list
+
+elif [ "$1" = screenshot ]; then
+    adb -s $device exec-out screencap -p > "$2"
+
+elif [ "$1" = dumpui ]; then
+    adb -s $device shell uiautomator dump
+    sleep 1
+    adb -s $device pull /sdcard/window_dump.xml
+    sleep 0.5
+    cat "window_dump.xml" | python3 -c 'import sys; import xml.dom.minidom; s=sys.stdin.read(); print(xml.dom.minidom.parseString(s).toprettyxml())' > "$2"
+    rm "window_dump.xml"
+
+elif [ "$1" = record ]; then
+    adb -s $device shell screenrecord --time-limit=30 /sdcard/$2.mp4
+ 
+elif [ "$1" = fetch ]; then 
+    adb -s $device pull /sdcard/$2.mp4
+
+elif [ "$1" = help ]; then
+    echo "supported commands:"
+    echo "---- on : enables talkback"
+    echo "---- off: disables talkback"
+    echo "---- next: swipe right"
+    echo "---- pre: swipe left"
+    echo "---- up: swipe up"
+    echo "---- down: swipe down"
+    echo "---- click: click"
+    echo "---- cwc: click, wait for events and capture"
+    echo "---- nwc: swipe, wait for proper events and capture"
+    echo "---- type: type a given input in the focused textbox"
+    echo "---- dump: dump a11y tree"
+    echo "---- dumptb: dump talkback node tree"
+    echo "---- pkgname: prints the package name"
+    echo "---- orientation: prints the orientation"
+    echo "---- getAPK: pull the apk of the requested app <pkgname> <dir_name>"
+    echo "---- install: install the given apk"
+    echo "---- googleplay: open apk on google play"
+    echo "---- dumpui: uiautomator capture xml"
+    echo "---- dumpevents: dump the accessibility events from a given start time"
+    echo "---- record: record the screen until ctrl+c <file_name>"
+    echo "---- fetch: get the captured video <file_name>"
+    echo "---- snapshot: save a snapshot of the emulator"
+    echo "---- del: delete a snapshot of the emulator"
+    echo "---- listsnapshot: list snapshots of the emulator"
+    echo "---- loadsnapshot: load a snapshot of the emulator"
+fi
+
