@@ -1,8 +1,12 @@
 ## Automated Accessibility Analysis of Dynamic Content Changes on Mobile Apps
-### [Source Code of TIMESTUMP](https://github.com/timestump/timestump/tree/main/Source%20Code)
-
-### [Study for the Precision of Captured Data](https://github.com/timestump/timestump/blob/main/Data%20Capturing%20Accuracy/Data%20Capturing%20Accuracy.md)
-
+```
+@inproceedings{Mehralian2025,
+  author    = {Forough Mehralian and Ziayo He and Sam Malek},
+  title     = {Automated Accessibility Analysis of Dynamic Content Changes on Mobile Apps},
+  booktitle = {Proceedings of the International Conference on Software Engineering (ICSE)},
+  year      = {2025},
+}
+```
 ### Problematic Dynamic Content Changes with Pseudocodes
 
 
